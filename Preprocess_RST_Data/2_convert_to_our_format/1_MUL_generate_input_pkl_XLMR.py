@@ -9,7 +9,6 @@ from binary_tree import Node
 from transformers import XLMRobertaTokenizer
 
 global_bert_tokenizer = XLMRobertaTokenizer.from_pretrained('xlm-roberta-base')
-<<<<<<< Updated upstream
 global File_Name_list
 File_Name_list = []
 global Sentences_list
@@ -31,18 +30,6 @@ Siblings_list = []
 global Sentence_Span_list
 Sentence_Span_list = []
 
-=======
-File_Name_list = []
-Sentences_list = []
-EDUBreaks_list = []
-LableforMetric_list = []
-ParsingIndex_list = []
-Relation_list = []
-DecoderInput_list = []
-Parents_list = []
-Siblings_list = []
-Sentence_Span_list = []
->>>>>>> Stashed changes
 
 RelationTable = ['Attribution_SN', 'Enablement_NS', 'Cause_SN', 'Cause_NN', 'Temporal_SN',
                  'Condition_NN', 'Cause_NS', 'Elaboration_NS', 'Background_NS',
@@ -295,7 +282,6 @@ if __name__ == '__main__':
         print("Build mode only depth / breadth ")
         exit()
 
-<<<<<<< Updated upstream
     input_base_path = "/Users/sara/Documents/projects/DMRST_Parser/Preprocess_RST_Data/data/test/"
     ## test/maz-00002
     output_base_path = "/Users/sara/Documents/projects/DMRST_Parser/Preprocess_RST_Data/data/test2/pickle/depth"
@@ -303,11 +289,6 @@ if __name__ == '__main__':
 
 
 
-=======
-    input_base_path = "/Users/sara/Documents/projects/DMRST_Parser/Preprocess_RST_Data/data/derst2/"
-    output_base_path = "/Users/sara/Documents/projects/DMRST_Parser/Preprocess_RST_Data/data/test/pickle"
-    # assert build_mode.strip() in output_base_path
->>>>>>> Stashed changes
     is_sentence_level = False
     subdirs = os.listdir(input_base_path)
     for subdir in subdirs:
