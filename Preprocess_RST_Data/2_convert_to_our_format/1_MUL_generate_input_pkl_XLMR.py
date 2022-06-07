@@ -9,6 +9,26 @@ from binary_tree import Node
 from transformers import XLMRobertaTokenizer
 
 global_bert_tokenizer = XLMRobertaTokenizer.from_pretrained('xlm-roberta-base')
+global File_Name_list
+File_Name_list = []
+global Sentences_list
+Sentences_list = []
+global EDUBreaks_list
+EDUBreaks_list= []
+global LableforMetric_list
+LableforMetric_list = []
+global ParsingIndex_list
+ParsingIndex_list = []
+global Relation_list
+Relation_list = []
+global DecoderInput_list
+DecoderInput_list = []
+global Parents_list
+Parents_list = []
+global Siblings_list
+Siblings_list = []
+global Sentence_Span_list
+Sentence_Span_list = []
 
 
 RelationTable = ['Attribution_SN', 'Enablement_NS', 'Cause_SN', 'Cause_NN', 'Temporal_SN',
@@ -261,9 +281,9 @@ if __name__ == '__main__':
         print("Build mode only depth / breadth ")
         exit()
 
-    input_base_path = "data/translated_data/to_pt/"
-
-    output_base_path = "data/pickle_data/depth/to_pt"
+    input_base_path = "/Users/sara/Documents/projects/DMRST_Parser/Preprocess_RST_Data/data/test/"
+    ## test/maz-00002
+    output_base_path = "/Users/sara/Documents/projects/DMRST_Parser/Preprocess_RST_Data/data/test2/pickle/depth"
     assert build_mode.strip() in output_base_path
 
 
