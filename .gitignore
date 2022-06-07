@@ -1,0 +1,6 @@
+PreProcess_RST_Data/data
+__pycache__/
+.DS_Store
+data/text_for_inference.txt
+depth_mode/
+Preprocess_RST_Data/2_convert_to_our_format/fill_dmrg.py
