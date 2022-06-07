@@ -6,7 +6,7 @@ import os
 import config
 from transformers import AutoTokenizer, AutoModel
 from model_depth import ParsingNet
-
+from collections import OrderedDict
 os.environ["CUDA_VISIBLE_DEVICES"] = str(config.global_gpu_id)
 
 
@@ -54,15 +54,19 @@ if __name__ == '__main__':
     bert_tokenizer = AutoTokenizer.from_pretrained("xlm-roberta-base", use_fast=True)
     bert_model = AutoModel.from_pretrained("xlm-roberta-base")
 
-    bert_model = bert_model.cuda()
+    bert_model = bert_model
 
     for name, param in bert_model.named_parameters():
         param.requires_grad = False
 
     model = ParsingNet(bert_model, bert_tokenizer=bert_tokenizer)
 
-    model = model.cuda()
-    model.load_state_dict(torch.load(model_path))
+    model = model
+    state_dict = torch.load(model_path, map_location=torch.device('cpu'))
+    
+    new_state_dict = OrderedDict()
+    
+    model.load_state_dict(model.state_dict())
     model = model.eval()
 
     Test_InputSentences = open("./data/text_for_inference.txt").readlines()

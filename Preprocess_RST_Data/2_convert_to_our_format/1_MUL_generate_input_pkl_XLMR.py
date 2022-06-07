@@ -9,6 +9,7 @@ from binary_tree import Node
 from transformers import XLMRobertaTokenizer
 
 global_bert_tokenizer = XLMRobertaTokenizer.from_pretrained('xlm-roberta-base')
+<<<<<<< Updated upstream
 global File_Name_list
 File_Name_list = []
 global Sentences_list
@@ -30,6 +31,18 @@ Siblings_list = []
 global Sentence_Span_list
 Sentence_Span_list = []
 
+=======
+File_Name_list = []
+Sentences_list = []
+EDUBreaks_list = []
+LableforMetric_list = []
+ParsingIndex_list = []
+Relation_list = []
+DecoderInput_list = []
+Parents_list = []
+Siblings_list = []
+Sentence_Span_list = []
+>>>>>>> Stashed changes
 
 RelationTable = ['Attribution_SN', 'Enablement_NS', 'Cause_SN', 'Cause_NN', 'Temporal_SN',
                  'Condition_NN', 'Cause_NS', 'Elaboration_NS', 'Background_NS',
@@ -97,10 +110,10 @@ def parse_sentence(root_node, edus_list, is_depth_manner):
 
             #   Sibling:
             if node.parent is None:
-                sibling_index = 99
+                sibling_index = 10000
             else:
                 if node == node.parent.left:
-                    sibling_index = 99
+                    sibling_index = 10000
                 else:
                     sibling_index = node.parent.left.span[1] - edu_start
             parser_input.Siblings.append(sibling_index)
@@ -249,7 +262,7 @@ def read_edus(edus_path):
     with open(edus_path, 'r') as f:
         for line in f:
             tokens = global_bert_tokenizer.tokenize(line.strip())
-            # tokens = word_tokenize(line.strip())
+            tokens = word_tokenize(line.strip())
             edus_list.append(tokens)
     return edus_list
 
@@ -270,6 +283,7 @@ def save_pickle(obj, file_path):
 
 
 if __name__ == '__main__':
+    
 
     # build_mode = input("Please select the build mode: depth / breadth :")
     build_mode = "depth"
@@ -281,6 +295,7 @@ if __name__ == '__main__':
         print("Build mode only depth / breadth ")
         exit()
 
+<<<<<<< Updated upstream
     input_base_path = "/Users/sara/Documents/projects/DMRST_Parser/Preprocess_RST_Data/data/test/"
     ## test/maz-00002
     output_base_path = "/Users/sara/Documents/projects/DMRST_Parser/Preprocess_RST_Data/data/test2/pickle/depth"
@@ -288,6 +303,11 @@ if __name__ == '__main__':
 
 
 
+=======
+    input_base_path = "/Users/sara/Documents/projects/DMRST_Parser/Preprocess_RST_Data/data/derst2/"
+    output_base_path = "/Users/sara/Documents/projects/DMRST_Parser/Preprocess_RST_Data/data/test/pickle"
+    # assert build_mode.strip() in output_base_path
+>>>>>>> Stashed changes
     is_sentence_level = False
     subdirs = os.listdir(input_base_path)
     for subdir in subdirs:
@@ -306,28 +326,30 @@ if __name__ == '__main__':
         total_sentences = 0
         num_sentence_with_one_edu = 0
 
-        one_language_dmrg_path = input_base_path + subdir + "/"
-
-        if not os.path.isdir(output_base_path + "/" + subdir + "/"):
-            os.mkdir(output_base_path + "/" + subdir + "/")
-        output_path = output_base_path + "/" + subdir + "/"
+        # one_language_dmrg_path = input_base_path + subdir + "/"
+        one_language_dmrg_path = input_base_path + "/"
+        # if not os.path.isdir(output_base_path + "/" + subdir + "/"):
+        #     os.mkdir(output_base_path + "/" + subdir + "/")
+        # output_path = output_base_path + "/" + subdir + "/"
+        output_path = output_base_path
 
         dmrg_paths = sorted(glob(one_language_dmrg_path + '*.dmrg'))
         # dmrg_paths = sorted(glob(All_raw_files_path + '*.dmrg'))
 
         for dmrg_path in dmrg_paths:
             file_name = dmrg_path.split('/')[-1].split('.')[0]
+            edus_file_path = input_base_path + file_name + '.segment.edus'
             File_Name_list.append(file_name)
-            edus_file_path = input_base_path + subdir + "/" + file_name + '.edus'
-            out_file_path = input_base_path + subdir + "/" + file_name + '.edus'
+            # edus_file_path = input_base_path + subdir + "/" + file_name + '.edus'
+            out_file_path = input_base_path + file_name + '.segment.edus'
 
-            if os.path.exists(out_file_path):
-                if os.path.exists(edus_file_path):
-                    generate_input(dmrg_path, out_file_path, edus_file_path, is_sentence_level, is_depth_manner=depth_manner)
-                else:
-                    print(edus_file_path)
-            else:
-                print(out_file_path)
+            # if os.path.exists(out_file_path):
+            # if os.path.exists(edus_file_path):
+            generate_input(dmrg_path, out_file_path, edus_file_path, is_sentence_level, is_depth_manner=depth_manner)
+            # else:
+            #     print(edus_file_path)
+            # else:
+            #     print(out_file_path)
 
         save_pickle(File_Name_list, output_path + 'FileName.pickle')
         save_pickle(Sentences_list, output_path + 'InputSentences.pickle')
